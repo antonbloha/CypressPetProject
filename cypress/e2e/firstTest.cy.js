@@ -1,8 +1,10 @@
 /// <reference types="cypress" />
 
+
 describe('First', ()=> {
+    
     it.only('AE_TestCase_1', () =>{
-        cy.visit('/')
+        
         cy.get('.logo.pull-left img').should('be.visible')
         cy.contains('a', 'Signup / Login').click()
         cy.get('.signup-form').should('be.visible')

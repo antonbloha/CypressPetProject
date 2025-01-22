@@ -16,5 +16,15 @@
 // Import commands.js using ES2015 syntax:
 import './commands'
 
+beforeEach(() => {
+    const testFileName = Cypress.spec.name; // Get the current test file name
+  
+    // Derive the URL based on the test file name
+    const relativeUrl = `/${testFileName.replace('.cy.js', '')}`;
+  
+    // Automatically visit the derived URL
+    cy.visit(relativeUrl);
+  });
+
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
