@@ -7,4 +7,5 @@ class SignUpPage {
     getMonthBirth = () => cy.get('#months');
     getYearsBirth = () => cy.get('#years');
     getNewLetter = () => cy.get('#newsletter');
+    getNewLetters = () => cy.get('#newsletters');
 }
