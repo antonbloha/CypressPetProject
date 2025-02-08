@@ -6,8 +6,8 @@ pipeline {
             steps {
                 script {
                     def branchName = env.CHANGE_BRANCH ?: env.BRANCH_NAME ?: 'main'
-                    git url: 'https://github.com/antonbloha/CypressPetProject.git', branch: branchName
-                }  // ✅ This closing brace was missing
+                    git url: 'git@github.com:antonbloha/CypressPetProject.git', branch: branchName
+                }  
             }
         }
 
