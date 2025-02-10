@@ -18,6 +18,7 @@ pipeline {
         }
         stage('Generate Allure Report') {
             steps {
+                sh 'mkdir -p allure-results'  // Ensure the directory exists
                 sh 'npx allure generate allure-results --clean -o allure-report'
             }
         }
@@ -30,9 +31,14 @@ pipeline {
             steps {
                 emailext(
                     subject: "Cypress Test Results: ${currentBuild.result}",
-                    body: "Cypress test execution has completed.\n\nView the report at: ${BUILD_URL}/artifact/allure-report/index.html",
+                    body: """Cypress test execution has completed.
+                        <br><br>
+                        <b>Status:</b> ${currentBuild.result} <br>
+                        <b>View the report:</b> <a href="${BUILD_URL}/artifact/allure-report/index.html">Allure Report</a>
+                    """,
                     recipientProviders: [[$class: 'DevelopersRecipientProvider']],
-                    to: 'your-email@example.com'
+                    to: 'your-email@example.com',
+                    mimeType: 'text/html'
                 )
             }
         }
