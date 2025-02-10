@@ -23,15 +23,17 @@ pipeline {
         }
         stage('Archive Allure Report') {
             steps {
-                archiveArtifacts 'allure-report/**'
+                archiveArtifacts artifacts: 'allure-report/**', fingerprint: true
             }
         }
         stage('Email Test Results') {
             steps {
-                mail to: 'qvotan@gmail.com',
-                     subject: 'Cypress Test Results',
-                     body: 'Test execution completed. See attached Allure report.',
-                     attachLog: true
+                emailext(
+                    subject: "Cypress Test Results: ${currentBuild.result}",
+                    body: "Cypress test execution has completed.\n\nView the report at: ${BUILD_URL}/artifact/allure-report/index.html",
+                    recipientProviders: [[$class: 'DevelopersRecipientProvider']],
+                    to: 'your-email@example.com'
+                )
             }
         }
     }
