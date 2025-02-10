@@ -19,13 +19,13 @@ pipeline {
 
         stage('Run Cypress Tests') {
             steps {
-                sh 'npx cypress run'  // Runs Cypress tests
+                sh 'xvfb-run --auto-servernum --server-args="-screen 0 1280x1024x24" npx cypress run' 
             }
         }
 
         stage('Publish Test Results') {
             steps {
-                junit '**/results/*.xml'  // Adjust if needed for test reports
+                junit '**/results/*.xml'  
             }
         }
     }
