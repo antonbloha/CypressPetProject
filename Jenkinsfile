@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git 'git@github.com:antonbloha/CypressPetProject.git'
+                git branch: 'main', url: 'git@github.com:antonbloha/CypressPetProject.git'
             }
         }
         stage('Install Dependencies') {
