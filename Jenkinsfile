@@ -37,7 +37,7 @@ pipeline {
                         <b>View the report:</b> <a href="${BUILD_URL}/artifact/allure-report/index.html">Allure Report</a>
                     """,
                     recipientProviders: [[$class: 'DevelopersRecipientProvider']],
-                    to: 'your-email@example.com',
+                    to: 'tonybloha@outlook.com',
                     mimeType: 'text/html'
                 )
             }
