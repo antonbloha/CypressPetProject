@@ -22,6 +22,14 @@ pipeline {
                 sh 'npx allure generate allure-results --clean -o allure-report'
             }
         }
+        stage('Deploy Allure Report to Nginx') {
+            steps {
+            sh '''
+            sudo docker cp allure-report my-nginx:/usr/share/nginx/html
+            sudo docker exec my-nginx nginx -s reload
+            '''
+            }
+        }
         stage('Archive Allure Report') {
             steps {
                 archiveArtifacts artifacts: 'allure-report/**', fingerprint: true
